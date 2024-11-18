@@ -6,7 +6,7 @@ class StudentAdmin(admin.ModelAdmin):
     list_display = ['username', 'first_name','last_name','status',  'get_cohort']
 
     def get_cohort(self, obj):
-        cohort_group = obj.cohortgroup_set.all() 
+        cohort_group = obj.cohort.all() 
         return ", ".join([cohort.name for cohort in cohort_group])
 
     # Optional: Add a short description for the method (displayed as column title)
@@ -17,7 +17,7 @@ class StudentAdmin(admin.ModelAdmin):
 
 @admin.register(Student_Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['student','date_of_birth', 'rating','date_join','address']
+    list_display = ['student','date_of_birth', 'rating','address']
 
     
 
