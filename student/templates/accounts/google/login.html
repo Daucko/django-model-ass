@@ -1,0 +1,80 @@
+{% load socialaccount %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        /* Basic styling for better visuals */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .menu a {
+            margin: 10px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .menu a:hover {
+            text-decoration: underline;
+        }
+        .google-login-btn {
+            display: block;
+            margin: 10px auto;
+            text-align: center;
+            padding: 10px;
+            border: none;
+            color: white;
+            background-color: #4285F4;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign In</h1>
+        <div class="menu">
+            <a href="{% url 'account_login' %}">Sign In</a>
+            <a href="{% url 'account_signup' %}">Sign Up</a>
+        </div>
+        
+        <!-- Google Login Button -->
+        <a href="{% provider_login_url 'google' %}" class="google-login-btn">
+            Sign in with Google
+        </a>
+
+        <hr />
+
+        <p>Or sign in manually:</p>
+        <form method="post" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            <label for="username">Username/Email:</label>
+            <input type="text" name="login" required>
+            <br /><br />
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+            <br /><br />
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
